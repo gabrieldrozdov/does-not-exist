@@ -11,7 +11,7 @@ function generateURL() {
 
 
 	var request = new XMLHttpRequest();
-	request.open('GET', url, true);
+	request.open('GET', url+'?origin=*', true);
 	request.onreadystatechange = function() {
 		if (request.readyState == 4){
 			console.log(request.status)
@@ -49,7 +49,8 @@ async function checkURL() {
 	console.log(url)
     fetch(url, { signal: controller.signal })
 		.then(response => {
-			clearTimeout(timeoutId)
+			clearTimeout(timeoutId);
+			console.log(response);
 			if (response.status == 404) {
 				link.dataset.state = 0;
 				checkURL();
@@ -60,6 +61,7 @@ async function checkURL() {
 		})
 		.catch((err) => {
 			link.dataset.state = 0;
+			console.log(err);
 			checkURL();
 		})
 }

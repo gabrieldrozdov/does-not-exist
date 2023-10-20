@@ -7,15 +7,21 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1px;
+	width: 100vw;
+	min-height: 100dvh;
 }
 .content a {
-	padding: 20px;
+	padding: 5px;
 	flex-grow: 1;
 	text-decoration: none;
 	text-align: center;
 	color: white;
 	background-color: rgb(100,100,100);
 	animation: link-in .5s forwards;
+	font-size: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 @keyframes link-in {
 	from {
@@ -32,8 +38,7 @@
 	background-color: rgb(255,0,0);
 }
 .content a:hover {
-	color: black;
-	background-color: transparent;
+	text-decoration: underline;
 }
 .content a:active {
 	opacity: .5;
