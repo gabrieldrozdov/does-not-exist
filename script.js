@@ -1,67 +1,51 @@
-let dict;
-let content = document.querySelector('.content');
-async function fetchDict() {
-	const response = await fetch("words_dictionary.json");
-	dict = await response.json();
-	checkURL();
-}
-fetchDict();
-
-function generateURL() {
-
-
-	var request = new XMLHttpRequest();
-	request.open('GET', url+'?origin=*', true);
-	request.onreadystatechange = function() {
-		if (request.readyState == 4){
-			console.log(request.status)
-		} else {
-			link.dataset.state = 0;
-		}
-		generateURL();
-	};
-	request.send();
-	setTimeout(() => {
-		request.abort();
-	}, 2000)
-}
-
-
 let iteration = 0;
 async function checkURL() {
+	console.log(iteration)
+	let word = words[iteration];
+	if (iteration == words.length) {
+		return
+	}
 	iteration++;
 
-	let word = Object.keys(dict)[Math.floor(Math.random()*Object.keys(dict).length)];
 	let url = 'https://' + word + '.com';
-	let index = Object.keys(dict).indexOf(word);
 
 	let link = document.createElement("a");
 	link.href = url;
-	link.innerText = index + ": " + url;
+	link.innerHTML = `<span>${word + '.com'}</span>`;
 	link.target = "_blank";
-	link.style.order = index;
 	link.dataset.iteration = iteration;
 	content.appendChild(link);
 
-	const controller = new AbortController()
-	const timeoutId = setTimeout(() => controller.abort(), 10000)
+	const controller = new AbortController();
+	let waited = false;
+	const timeoutId = setTimeout(() => {waited = true, controller.abort()}, 2000)
 	
 	console.log(url)
-    fetch(url, { signal: controller.signal })
-		.then(response => {
+    fetch(url, {
+			signal: controller.signal
+		})
+		.then((response) => {
 			clearTimeout(timeoutId);
 			console.log(response);
 			if (response.status == 404) {
-				link.dataset.state = 0;
+				// Not available
+				link.dataset.state = 1;
 				checkURL();
 			} else {
-				link.dataset.state = 1;
+				// Available
+				link.dataset.state = 0;
 				checkURL();
 			}
 		})
 		.catch((err) => {
-			link.dataset.state = 0;
-			console.log(err);
+			if (waited) {
+				// Timeout
+				link.dataset.state = 2;
+			} else {
+				// Not reached
+				link.dataset.state = 1;
+			}
+			console.log(err)
 			checkURL();
 		})
 }

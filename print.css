@@ -1,0 +1,29 @@
+
+@page {
+	size: 18.5in 24.5in;
+	margin: 0in;
+}
+@media print {
+	* {
+		print-color-adjust: exact;
+		-webkit-print-color-adjust: exact;
+	}
+	body {
+		width: 18.5in;
+		height: 24.5in;
+		padding: .25in;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.content {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1px;
+		width: 18in;
+		height: 24in;
+	}
+	.content * {
+		font-size: 12px;
+	}
+}
