@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Authentic Condensed';
-	src: url('/assets/fonts/limkin.ttf');
+	src: url('assets/fonts/limkin.ttf');
 }
 * {
 	margin: 0;
