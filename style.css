@@ -48,6 +48,7 @@ body {
 	justify-content: center;
 	color: rgb(var(--primary));
 	padding: .3em .1em .1em .1em;
+	transform: scale(0);
 }
 @keyframes link-in {
 	from {
@@ -82,7 +83,7 @@ body {
 
 .content a:hover {
 	z-index: 9;
-	box-shadow: 0 0 50px rgba(var(--primary), .5);
+	box-shadow: 0 0 50px rgb(var(--primary));
 }
 .content a:active {
 	box-shadow: unset;
@@ -103,13 +104,31 @@ body {
 	font-size: 5vw;
 	padding: .3em .1em .1em .1em;
 }
-.home h1 {
+.home-title {
 	flex-grow: 1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: rgb(var(--secondary));
 }
-.home a {
+.home-desc {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(var(--primary),.2);
+	flex-grow: 1;
+}
+.home-desc * {
+	color: rgb(var(--primary));
+}
+.home-desc a:hover {
+	opacity: .8;
+}
+.home-desc a:active {
+	opacity: .5;
+}
+.home-link {
 	flex-grow: 1;
 	background-color: rgb(var(--primary));
 	color: rgb(var(--secondary));
@@ -119,9 +138,68 @@ body {
 	justify-content: center;
 	border: 3px solid rgb(var(--primary));
 }
-.home a:hover {
+.home-link:hover {
 	background-color: rgb(var(--secondary));
 	color: rgb(var(--primary));
+}
+
+/* Key */
+.key {
+	display: flex;
+	position: sticky;
+	bottom: 0;
+	width: 100%;
+	background-color: rgb(var(--secondary));
+	color: rgb(var(--primary));
+	border-top: 2px solid rgb(var(--primary));
+	padding: 10px 5px 7px 5px;
+	gap: 20px;
+	z-index: 999999;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.key-icon {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+}
+.key-yes {
+	width: 20px;
+	height: 20px;
+	background-color: rgb(var(--primary));
+}
+.key-no {
+	width: 20px;
+	height: 20px;
+	background-color: rgb(var(--secondary));
+	border: 2px solid rgb(var(--primary));
+}
+.key-timeout {
+	width: 20px;
+	height: 20px;
+	background-color: rgba(var(--primary), .2);
+	border: 2px dashed rgb(var(--primary));
+}
+.key-btn {
+	background-color: rgb(var(--primary));
+	border: 2px solid rgb(var(--primary));
+	color: rgb(var(--secondary));
+	padding: 2px 20px 0 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: 12px;
+	text-decoration: none;
+}
+.key-btn:hover {
+	opacity: .8;
+}
+.key-btn:active {
+	opacity: .5;
 }
 
 /* Print */
@@ -140,5 +218,8 @@ body {
 		gap: 3px;
 		width: 18in;
 		height: 24in;
+	}
+	.key {
+		display: none;
 	}
 }
